@@ -1,0 +1,7 @@
+{
+  "products": [
+    { "id": 1, "name": "Laptop", "price": 55000, "description": "High performance laptop" },
+    { "id": 2, "name": "Headphones", "price": 3000, "description": "Noise-cancelling headphones" },
+    { "id": 3, "name": "Smartphone", "price": 25000, "description": "Latest model smartphone" }
+  ]
+}
