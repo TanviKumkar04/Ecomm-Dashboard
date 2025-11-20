@@ -1,36 +1,63 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { loginUser } from "../lib/auth";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const loginHandler = () => {
-    localStorage.setItem("auth", "true");
+  const handleLogin = () => {
+    if (!username || !password) {
+      setError("Please enter username and password");
+      return;
+    }
+
+    // In real app → check API
+    loginUser({ username });
+
     window.location.href = "/";
   };
 
   return (
-    <div className="flex justify-center p-10">
-      <div className="border p-8 rounded-lg shadow w-96">
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
+    <div className="flex justify-center mt-16">
+      <div className="w-96 bg-white p-6 rounded shadow">
+        <h2 className="text-2xl font-bold mb-4">Login</h2>
+
+        {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
         <input
-          className="border w-full p-2 mb-4"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          className="border p-2 w-full mb-3"
+          placeholder="Username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <input
+          className="border p-2 w-full mb-3"
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <button
-          className="bg-black text-white w-full py-2"
-          onClick={loginHandler}
+          onClick={handleLogin}
+          className="bg-blue-600 text-white px-4 py-2 w-full rounded hover:bg-blue-700"
         >
           Login
         </button>
 
-        <p className="mt-4 text-sm">
-          No account? <Link className="text-blue-500" href="/register">Register</Link>
+        <p className="text-sm mt-3 text-right">
+          <a href="/forgot-password" className="text-blue-500 hover:underline">
+            Forgot password?
+          </a>
+        </p>
+
+        <p className="text-sm text-center mt-4">
+          Don’t have an account?{" "}
+          <a href="/register" className="text-blue-600 hover:underline">
+            Register
+          </a>
         </p>
       </div>
     </div>

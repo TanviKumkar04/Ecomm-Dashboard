@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:5000"; // FIXED ✅
 
 export const fetchProducts = createAsyncThunk("products/all", async () => {
   const res = await axios.get(`${BASE_URL}/products`);
@@ -12,7 +12,8 @@ const productsSlice = createSlice({
   name: "products",
   initialState: {
     items: [],
-    loading: false
+    loading: false,
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -21,7 +22,7 @@ const productsSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = action.payload; // now it's an array
         state.loading = false;
       });
   },
