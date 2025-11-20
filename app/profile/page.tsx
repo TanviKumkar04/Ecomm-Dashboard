@@ -7,7 +7,7 @@ export default function ProfilePage() {
   const [user] = useState({
     username: "tanvi123",
     email: "tanvi@example.com",
-    photo: "/profile.png", // put any icon in public folder
+    photo: "/photo.jpeg.jpg", 
   });
 
   return (
