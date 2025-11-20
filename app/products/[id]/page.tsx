@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 type Product = {
@@ -13,62 +13,30 @@ type Product = {
 };
 
 const sampleProducts: Product[] = [
-  {
-    id: 1,
-    name: "Slim Laptop Pro",
-    price: 54999,
-    desc: "Powerful performance, sleek design.",
-    img: "/images/laptop.jpeg",
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    name: "Smartphone X",
-    price: 24999,
-    desc: "Brilliant display, long battery life.",
-    img: "/images/phone.jpeg",
-    rating: 4.3,
-  },
-  {
-    id: 3,
-    name: "Wireless Earbuds",
-    price: 1999,
-    desc: "Immersive sound with noise cancellation.",
-    img: "/images/earbuds.jpeg",
-    rating: 4.1,
-  },
-  {
-    id: 4,
-    name: "Classic Backpack",
-    price: 1299,
-    desc: "Durable and roomy for daily use.",
-    img: "/images/bag.jpeg",
-    rating: 4.2,
-  },
-  {
-    id: 5,
-    name: "Smartwatch Lite",
-    price: 5999,
-    desc: "Track your fitness & notifications.",
-    img: "/images/watch.jpeg",
-    rating: 4.0,
-  },
-  {
-    id: 6,
-    name: "Bluetooth Speaker",
-    price: 3499,
-    desc: "Portable sound with deep bass.",
-    img: "/images/speaker.jpeg",
-    rating: 4.4,
-  },
+  { id: 1, name: "Slim Laptop Pro", price: 54999, desc: "Powerful performance, sleek design.", img: "/images/laptop.jpeg", rating: 4.5 },
+  { id: 2, name: "Smartphone X", price: 24999, desc: "Brilliant display, long battery life.", img: "/images/phone.jpeg", rating: 4.3 },
+  { id: 3, name: "Wireless Earbuds", price: 1999, desc: "Immersive sound with noise cancellation.", img: "/images/earbuds.jpeg", rating: 4.1 },
+  { id: 4, name: "Classic Backpack", price: 1299, desc: "Durable and roomy for daily use.", img: "/images/bag.jpeg", rating: 4.2 },
+  { id: 5, name: "Smartwatch Lite", price: 5999, desc: "Track your fitness & notifications.", img: "/images/watch.jpeg", rating: 4.0 },
+  { id: 6, name: "Bluetooth Speaker", price: 3499, desc: "Portable sound with deep bass.", img: "/images/speaker.jpeg", rating: 4.4 },
 ];
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const router = useRouter();
 
-  const product = sampleProducts.find(
-    (p) => p.id === Number(id)
-  );
+  const product = sampleProducts.find((p) => p.id === Number(id));
+
+  const handleAddToCart = () => {
+    const isLoggedIn = localStorage.getItem("user");
+
+    if (!isLoggedIn) {
+      router.push("/login"); // redirect to login
+      return;
+    }
+
+    alert(`"${product?.name}" added to cart`);
+  };
 
   if (!product) {
     return (
@@ -97,9 +65,7 @@ export default function ProductDetails() {
           <h1 className="text-3xl font-bold">{product.name}</h1>
 
           {product.rating && (
-            <p className="text-yellow-600 font-medium">
-              ⭐ {product.rating} / 5
-            </p>
+            <p className="text-yellow-600 font-medium">⭐ {product.rating} / 5</p>
           )}
 
           <p className="text-gray-700">{product.desc}</p>
@@ -108,7 +74,10 @@ export default function ProductDetails() {
             ₹{product.price.toLocaleString()}
           </p>
 
-          <button className="bg-blue-600 text-white px-5 py-2 rounded mt-2 hover:bg-blue-700">
+          <button
+            onClick={handleAddToCart}
+            className="bg-blue-600 text-white px-5 py-2 rounded mt-2 hover:bg-blue-700"
+          >
             Add to Cart
           </button>
         </div>

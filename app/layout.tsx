@@ -1,7 +1,7 @@
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
-import Providers from "@/redux/Providers";
+import Providers from "@/redux/Provider";
 
 export const metadata = {
   title: "Dashboard",
