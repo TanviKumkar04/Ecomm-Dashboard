@@ -1,0 +1,5 @@
+[
+{ "id": "1", "slug": "red-shirt", "title": "Red Shirt", "price": 299, "description": "Comfortable red shirt.", "inventory": 12 },
+{ "id": "2", "slug": "blue-jeans", "title": "Blue Jeans", "price": 799, "description": "Stylish blue jeans.", "inventory": 5 },
+{ "id": "3", "slug": "sneakers", "title": "Sneakers", "price": 1999, "description": "Sporty sneakers.", "inventory": 7 }
+]

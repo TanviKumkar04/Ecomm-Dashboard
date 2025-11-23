@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "tanvi@example.com",
+      "password": "123456",
+      "name": "Admin",
+      "role": "admin"
+    }
+  ],
+  "products": [
+    { "id": 1, "name": "Shoes", "price": 1200, "desc": "Premium shoes" },
+    { "id": 2, "name": "Shirt", "price": 800, "desc": "Cotton shirt" },
+    { "id": 3, "name": "Watch", "price": 3000, "desc": "Digital watch" }
+  ],
+  "submissions": []
+}
